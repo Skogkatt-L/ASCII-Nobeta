@@ -1,0 +1,31 @@
+$("p.rainbow-text").html("<%= j (@ascii_art.html_safe) %>");
+$("#ascii_raw").val("<%= j (@ascii_raw.html_safe) %>");
+start_progress();
+
+function start_progress(){
+  var progress = 0;
+  $(".progress-bar")[0].style.width = progress + "%";
+  $(".progress-bar")[0].ariaValueNow = progress;
+  $("#pg_div").show(100, function(){
+    var uploading = setInterval(function(){
+      $(".progress-bar")[0].style.width = progress + "%";
+      $(".progress-bar")[0].ariaValueNow = progress;
+      if (progress >= 100){
+        $("#pg_div").hide(400, function(){
+          $("#download_btn").removeAttr("disabled");
+          $("#file_upload").removeAttr("disabled");
+          $("#fake_upload_btn").removeAttr("disabled");
+          $("#fake_colour_mode").removeAttr("disabled");
+          $("#fake_inverse").removeAttr("disabled");
+          $("#ascii_art").fadeIn(400, function(){
+            $("#dl_div").fadeIn(400, function(){
+              clearInterval(uploading);
+            });
+          });
+        });
+      } else {
+        progress ++;
+      }
+    },100)
+  });
+}

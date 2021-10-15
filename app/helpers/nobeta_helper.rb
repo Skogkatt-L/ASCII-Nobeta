@@ -1,0 +1,2 @@
+module NobetaHelper
+end

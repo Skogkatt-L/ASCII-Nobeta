@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body.nobeta.index {
+  background-color: black;
+  background-size: 800% 800%;
+}
+
+#ascii_art p {
+  color: green;
+  font-size: 0.38vw;
+  line-height: 1;
+  font-family: 'Share Tech Mono', monospace;
+  white-space: pre;
+  cursor: default;
+}
+
+#ascii_form p {
+  color: green;
+  font-size: 1.5vw;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: default;
+}
+
+.hide{
+  display: none;
+}
+
+.rainbow-border {
+  border: 3px dotted transparent;
+  -webkit-border: 3px dotted transparent;
+  -moz-border: 3px dotted transparent;
+  -o-border: 3px dotted transparent;
+
+  background-image: linear-gradient(black, black), linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-image: -webkit-linear-gradient(black, black), -webkit-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -moz-background-image: -moz-linear-gradient(black, black), -moz-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -o-background-image: -o-linear-gradient(black, black), -o-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+
+  background-origin: border-box;
+  -moz-background-origin: border-box;
+
+  background-clip: padding-box, border-box;
+  -webkit-background-clip: padding-box, border-box;
+  -ms-background-clip: padding-box, border-box;
+
+  animation: hue 5s infinite linear;
+  -webkit-animation: hue 5s infinite linear;
+  -moz-animation: hue 5s infinite linear;
+}
+
+.rainbow-text {
+  background-image: linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-image: -webkit-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -moz-background-image: -moz-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+  -o-background-image: -o-linear-gradient(225deg, violet, indigo, blue, green, yellow, orange, red);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -ms-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  animation: hue 5s infinite linear;
+  -webkit-animation: hue 5s infinite linear;
+  -moz-animation: hue 5s infinite linear;
+
+  display: inline-block;
+  display: -moz-inline-block;
+}
+
+@keyframes hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@-webkit-keyframe hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
+
+@-moz-keyframe hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@-o-keyframe hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@media (min-width: 1440px){
+  #ascii_form p {
+    font-size: 1.2vw;
+  }
+}
+
+@media (min-width: 2560px){
+  #ascii_form p {
+    font-size: 0.8vw;
+  }
+}
+
+@media (max-width: 768px){
+  #ascii_form p {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 426px){
+  #ascii_form p {
+    font-size: 3.6vw;
+  }
+}
+
+// @media (max-width: 768px) {
+//   body.nobeta.index {
+//     background-size: 400% 400%;
+//   }
+//
+//   #ascii_form p {
+//     font-size: 1vw;
+//   }
+//
+//   #ascii_art p{
+//     font-size: 0.38vw;
+//   }
+// }

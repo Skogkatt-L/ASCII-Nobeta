@@ -1,0 +1,131 @@
+<section id="ascii_art">
+  <div class="row">
+    <div class="col">
+      <div class="container-fluid p-0 text-center">
+        <%= content_tag(:p, @ascii_art.html_safe, class: "rainbow-text") %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pg_bar">
+  <div class="row">
+    <div class="col">
+      <div class="container p-5">
+        <div id="pg_div" class="hide rainbow-border rounded-pill">
+          <div class="progress bg-dark" style="height: 10px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ascii_form">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container p-5 rainbow-border rounded-3">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="container text-center">
+              <%= form_tag({:action => "nobeta"}, {:id => "upload_form", :method => "post", :multipart => true, :remote => true}) do %>
+              <%= file_field_tag("file_upload", class: "form-control btn-dark m-1", :accept => "image/*, text/plain") %>
+              <%= hidden_field_tag "colour_mode", "0" %>
+              <%= hidden_field_tag "inverse", "0" %>
+              <%= button_tag("Upload File", id: "upload_btn", type: "submit", class: "hide") %>
+              <br /><p>Please upload your file here.<br/>(Image or .txt, Max: 3MB)</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-4">
+            <div class="container text-center">
+              <div id="dl_div" class="hide">
+                <%= form_tag({:action => "file_download"}, {:id => "dl_form", :method => "post", :multipart => true, :target => "_blank"}) do %>
+                <%= hidden_field_tag "ascii_raw", "default" %>
+                <%= button_tag("Download ASCII",id: "download_btn", type: "button", class: "btn btn-dark text-nowrap m-1") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="container text-center">
+              <%= button_tag("Upload File",id: "fake_upload_btn", type: "button", class: "btn btn-dark text-nowrap m-1") %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="container">
+              <%= select_tag("fake_colour_mode", options_for_select([['> Select colour mode', 0], ['Default', 1], ['Lightness', 2], ['Lominosity', 3]], 0), class: "form-select form-select-sm btn-dark m-1") %>
+              <div class="form-check form-switch mx-2">
+                <%= check_box_tag("fake_inverse", "", false, class: "form-check-input btn-dark") %>
+                <%= label_tag("fake_inverse", "Inverse?", class: "form-check-label text-light") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="container p-3">
+        <br />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $("#fake_upload_btn").click(function () {
+    $("#upload_btn").click();
+  });
+
+$("#fake_colour_mode").change(function () {
+  var c_mode = this.value;
+  $("#colour_mode").val(c_mode);
+  $("#upload_btn").click();
+});
+
+$("#fake_inverse").change(function () {
+  if($(this).prop("checked") == true){
+    $("#inverse").val("1");
+  }else{
+    $("#inverse").val("0");
+  }
+  $("#upload_btn").click();
+});
+
+$("#file_upload").change(function () {
+  $("#upload_btn").click();
+});
+
+$("#upload_btn").click(function () {
+  $("#dl_div").fadeOut(10, function () {
+    $("#ascii_art").fadeOut(10, function () {
+      $("p.rainbow-text").empty();
+      $("#ascii_raw").val("");
+      $("#pg_div").show(10, function () {
+        var delay_time = 0;
+        var delay = setInterval(function () {
+          if (delay_time >= 100) {
+            $("#download_btn").attr("disabled", true);
+            $("#file_upload").attr("disabled", true);
+            $("#fake_upload_btn").attr("disabled", true);
+            $("#fake_colour_mode").attr("disabled", true);
+            $("#fake_inverse").attr("disabled", true);
+            clearInterval(delay);
+          } else {
+            delay_time++;
+          }
+        }, 10)
+      });
+    });
+  });
+});
+
+$("#download_btn").click(function () {
+  $("#dl_form").submit();
+});
+</script>
