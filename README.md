@@ -55,7 +55,7 @@ node -v
 npm -v
 ```
 
-- If NodeJS and npm install correctly, you can install yarn by npm, with the following command:
+- If NodeJS and npm install correctly, you can install yarn with the following command:
 ```
 sudo apt remove -y cmdtest
 sudo apt remove -y yarn
